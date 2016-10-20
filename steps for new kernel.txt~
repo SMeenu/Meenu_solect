@@ -1,0 +1,66 @@
+# Steps followed in developing the kernel:
+
+1. Get the linux tar ball
+2. untar in home
+
+3. Patching:
+(Copy linux contents in a and b folders - to compare after patching)
+
+a. 0001-kernel-4.7.x-imx6-2016-09-21.patch (from SVN truck/kernel)
+
+b. 0007-ath9k-Add-a-per-station-airtime-deficit-scheduler.patch (airtime fairness patch -hand patched xmit.c)
+
+c. 0001-cryptodev-1.8_linux-4.7.x_2016-06-27.patch
+
+4. sudo CROSS_COMPILE=arm-linux-gnueabihf- ARCH=arm INSTALL_PATH=/tmp INSTALL_MOD_PATH=/tmp INSTALL_FW_PATH=/tmp make solectria_defconfig
+(/home/ubu14/yellowstone-kernel-tmp/linux-4.7.5/arch/arm/configs/solectria_defconfig)
+
+5. sudo CROSS_COMPILE=arm-linux-gnueabihf- ARCH=arm INSTALL_PATH=/tmp INSTALL_MOD_PATH=/tmp INSTALL_FW_PATH=/tmp make clean
+
+6. sudo CROSS_COMPILE=arm-linux-gnueabihf- ARCH=arm INSTALL_PATH=/tmp INSTALL_MOD_PATH=/tmp INSTALL_FW_PATH=/tmp make zImage modules dtbs - takes long time
+
+7. sudo CROSS_COMPILE=arm-linux-gnueabihf- ARCH=arm INSTALL_PATH=/tmp INSTALL_MOD_PATH=/tmp INSTALL_FW_PATH=/tmp make modules_install
+
+8. cd cryptodev-linux-1.8/
+
+9. patch -p1 --dry-run -i ~/0001-cryptodev-1.8_linux-4.7.x_2016-06-27.patch 
+
+10. sudo CROSS_COMPILE=arm-linux-gnueabihf- ARCH=arm INSTALL_PATH=/tmp INSTALL_MOD_PATH=/tmp INSTALL_FW_PATH=/tmp KERNEL=~/linux-4.7.5 make clean
+
+11. sudo CROSS_COMPILE=arm-linux-gnueabihf- ARCH=arm INSTALL_PATH=/tmp INSTALL_MOD_PATH=/tmp INSTALL_FW_PATH=/tmp KERNEL_DIR=/home/ubu14/linux-4.7.5 make
+
+12. sudo CROSS_COMPILE=arm-linux-gnueabihf- ARCH=arm INSTALL_PATH=/tmp INSTALL_MOD_PATH=/tmp INSTALL_FW_PATH=/tmp KERNEL_DIR=/home/ubu14/linux-4.7.5 make install
+(Installing cryptodev.h in /usr/include/crypto ..)
+
+13. ls -l /tmp/lib/modules/4.7.5-IMX6.VAR_R17/
+
+
+unmounting usb:
+---------------
+umount /dev/sdb1
+
+Mounting USB to known location:
+------------------------------
+sudo mount /dev/sdb1 /mnt/rootfs
+
+Copy image to SD card
+---------------------
+sudo cp ~/linux-4.7.5/arch/arm/boot/zImage /mnt/rootfs/boot
+sudo cp ~/linux-4.7.5/arch/arm/boot/dts/imx6*var*.dtb /mnt/rootfs/boot/dtbs/
+sudo mkdir /mnt/rootfs/lib/modules/4.7.5-IMX6.VAR_R17
+sudo cp -R /tmp/lib/modules/4.7.5-IMX6.VAR_R17/* /mnt/rootfs//lib/modules/4.7.5-IMX6.VAR_R17/
+
+
+Copy disk image from Jenkins to sd:
+-----------------------------------
+sudo dd if=/tmp/rootfs-solectria-variscite.img of=/dev/sdb bs=4M conv=sync
+
+
+To see the process in minicom:
+ sudo minicom -D /dev/ttyUSB0
+
+
+
+
+
+
