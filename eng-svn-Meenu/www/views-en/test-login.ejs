@@ -1,0 +1,13 @@
+<% include header %>
+<% include navmenu %> 
+<% if (!authenticated) { %>
+	<% if (error) { %>
+		<script type="text/javascript">
+		alert("Login Failed");
+		</script>
+	<% } %>
+	<% include test-login-body %>
+<% } else { %>
+	<a href="/dashboard"> </a>
+<% } %>
+<% include footer %>

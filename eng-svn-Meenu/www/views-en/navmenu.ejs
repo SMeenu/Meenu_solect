@@ -1,0 +1,142 @@
+<body>
+
+  <div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+          <% if (authenticated) { %>
+                   <% if (typeof dashboard === 'undefined') { %>
+        <!-- not a dashboard -->
+        <a class="navbar-brand fa fa-chevron-left fa-1x" href="dashboard" > Dashboard</a>
+                     <% } %>
+        <% } else { %>
+        <a class="navbar-brand fa fa-chevron-left fa-1x" href="Login" > Login</a>
+        <% } %>
+        <!-- a class="navbar-brand" href="index.html"-->
+        <!-- /a -->
+      </div>
+      <!-- /.navbar-header -->
+      <!-- /.navbar-top-links -->
+
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <% if (authenticated) { %>
+            <li>
+              <a href="logout">
+                <i class="fa fa-sign-out fa-fw"></i> Logout
+              </a>
+            </li>
+            <% } %>
+            <li>
+              <a href="#">
+                <i class="fa fa-bar-chart-o fa-fw"></i> TLM Charts<span class="fa arrow"></span>
+              </a>
+              <ul class="nav nav-second-level">
+                <li>
+                  <a href="ACPower">Live Energy Production</a>
+                </li>
+              </ul>
+              <!-- /.nav-second-level -->
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-signal fa-fw"></i> TLM DSP<span class="fa arrow"></span>
+              </a>
+              <ul class="nav nav-second-level">
+                <% if (userLevel <= 2) { %>
+                <li>
+                  <a href="fast2d">128 KHz Data</a>
+                </li>
+                 <% } %>
+              </ul>
+              <!-- /.nav-second-level -->
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-sitemap fa-fw"></i> TLM Network<span class="fa arrow"></span>
+              </a>
+              <ul class="nav nav-second-level">
+                <li>
+                  <a href="network">Network Map</a>
+                </li>
+                <li>
+                  <a href="perftest">Test Network Performance</a>
+                </li>
+
+                <% if (userLevel <= 0) { %>
+                <li>
+                  <a href="editnetworkparams">Network Parameters</a>
+                </li>
+                  <% } %>
+              </ul>
+              <!-- /.nav-second-level -->
+            </li>
+            <% if (userLevel <= 0) { %>
+            <li>
+              <a href="#">
+                <i class="fa fa-wrench fa-fw"></i> TLM Admin<span class="fa arrow"></span>
+              </a>
+              <ul class="nav nav-second-level">
+                <li>
+                  <a href="editmodbusconfig">MODBUS Configuration</a>
+                </li>                
+                <li>
+                  <a href="accountmgr">User Accounts</a>
+                </li>
+                <li>
+                  <a href="viewlog">View Log</a>
+                </li>
+                <li>
+                  <a href="#">
+                    More...<span class="fa arrow"></span>
+                  </a>
+                  <ul class="nav nav-third-level">
+                    <li>
+                      <a href="#">Third level 1</a>
+                    </li>
+                    <li>
+                      <a href="#">Third level 2</a>
+                    </li>
+                  </ul>
+                  <!-- /.nav-third-level -->
+                </li>
+              </ul>
+              <!-- /.nav-second-level -->
+            </li>
+              <% }  else if (userLevel <= 2) { %>
+              <li>
+                <a href="#">
+                  <i class="fa fa-wrench fa-fw"></i> Settings<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                  <li>
+                    <a href="accountmgr/changemypasswd">Change Password</a>
+                  </li>
+                </ul>
+              </li>
+             
+            <% }  else  { %>
+              
+            <% } %>
+              <li>
+              <a href="deviceinfo">
+                <i class="fa fa-info fa-fw"></i> About Inverter
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+      </div>
+      <!-- /.navbar-static-side -->
+    </nav>
+  </div>
+  <!-- wrapper -->

@@ -1,0 +1,44 @@
+<body>
+  <script type = "text/javascript">
+   function test1() {
+	$.get("/test1",{}, function(data,status) {
+	/*	 document.body.innerHTML = data;
+		alert("exiting test1"+data);  */
+	});
+    }
+
+function test2() {
+        $.get("/test2",{}, function(data,status) {
+                document.body.innerHTML = data;
+                alert("exiting test1"+data);
+        });
+    }
+
+  </script>
+
+<div id="page-wrapper">                                                         
+  <div class="row">                                                             
+   <div class="col-lg-4 col-xs-12">                                        
+             <h3></h3>                                                               
+    <div class="form-group">                                                
+                <div class="row">  
+    <div class="panel panel-default">                                     
+        <div class="panel-heading">                                     
+         <h3>Mesh Performance Test</h3>                                       
+        </div>                                                          
+      <!-- /panel-heading -->                                        
+      <div class="panel-body">                                        
+       <form name="test" action="testresults" method="POST">               
+ 	<input type="submit" class="btn-primary btn btn-md" value="Test in quick mode" name="Submit" onclick="test1()">	
+	<br> Test for Latency  & Data loss </br>
+	<br>   </br>
+        <input type="submit" class="btn-primary btn btn-md" value="Test in extensive mode" name="Submit" onclick="test2()">  
+	<br> Include throughput in the above test </br>
+	<br> </br>
+	</form>
+         </div>                                                          
+         </div>
+         </div>
+         </div>
+       </div>                                                    
+</div>                                
