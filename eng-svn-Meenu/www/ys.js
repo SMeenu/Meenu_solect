@@ -1,9 +1,9 @@
 /**
  * webui - Node.js service
- * @Copyright (c) 2015-2016 by Solectria, A Yaskawa Company.  All rights reserved.
+ * @Copyright (c) 2015-2016 by Solectria, A Yaskawa Company.
  * @name ys.js
  * @version v0.1.0.1
- * @author fengjia hu
+ * @author fengjia hu, Meenupriya Swaminathan
  * @module --YellowStone Web Service - a nodejs application
  * @description  TLM's web/mobile server 
  */
