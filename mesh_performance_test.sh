@@ -1,5 +1,6 @@
 # Copyright (c) 2016 by Solectria, A Yashkawa Company. All rights reserved.
-
+# AUthor: Meenupriya Swaminathan
+# Reviewer: Jim Erwig
 # History: 2016-11-15 initial version
 
 # The script identifies neighbors from /etc/solectria/network/network_map.json file
