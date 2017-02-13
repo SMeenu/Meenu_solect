@@ -1,5 +1,5 @@
-# Copyright (c) 2016 by Solectria, A Yashkawa Company. All rights reserved.
-
+# Copyright (c) 2016 by Solectria. All rights reserved.
+# Author: Meenupriya Swaminathan
 # History: 2016-11-15 initial version
 #		2016-12-22 second version	
 
